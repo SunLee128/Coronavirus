@@ -2,6 +2,7 @@ module CoronaVirus
   class Human
     attr_accessor :x, :y, :positions, :path
     attr_reader :i
+    
     def initialize(options = {})
       @i = Input.new
       @x = options[:x] || @i.virus[0]
@@ -41,6 +42,5 @@ module CoronaVirus
         @positions << [@x, @y]
       end
     end
-
   end
 end

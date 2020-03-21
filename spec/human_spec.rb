@@ -64,17 +64,38 @@ RSpec.describe CoronaVirus::Human do
       subject.down
       expect(subject.y).to eq(1)
     end
+
+    it 'jumps the other side of the grid when y=i.grid_size-1' do
+      subject.y = 3
+      allow(input).to receive(:grid_size).with(4)
+      subject.down
+      expect(subject.y).to eq(0)
+    end
   end
   describe '#left' do
     it 'moves left' do
       subject.left
       expect(subject.x).to eq(3)
     end
+    it 'jumps the other side of the grid when x=0' do
+      subject.x = 0
+      allow(input).to receive(:grid_size).with(4)
+      subject.left
+      expect(subject.x).to eq(3)
+    end
+
   end
   describe '#right' do
     it 'moves right' do
       subject.right
       expect(subject.x).to eq(1)
+    end
+
+    it 'jumps the other side of the grid when x=i.grid_size-1' do
+      subject.x = 3
+      allow(input).to receive(:grid_size).with(4)
+      subject.right
+      expect(subject.x).to eq(0)
     end
   end
 
@@ -99,11 +120,5 @@ RSpec.describe CoronaVirus::Human do
     it 'responds to #right' do
       expect(subject).to respond_to(:right)
     end
-
-
   end
-
-
-
-
 end
