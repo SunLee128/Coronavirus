@@ -1,7 +1,9 @@
 require_relative "corona_virus/version"
 require_relative "corona_virus/input"
+require_relative "corona_virus/virus"
 
 module CoronaVirus
-  p Input.new
-  
+  Input.new
+  p Virus.new
+  # p Virus.x
 end

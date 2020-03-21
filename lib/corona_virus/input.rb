@@ -11,6 +11,5 @@ module CoronaVirus
       @path = options[:path] || inputs[3].chomp.upcase.split("") #["U","D","L",..]
       @vaccine =  options[:vaccine] || inputs[4].scan(/\d+/).map(&:to_i) #[x,y]
     end
-
   end
 end
