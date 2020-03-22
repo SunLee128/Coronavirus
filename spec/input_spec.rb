@@ -52,5 +52,4 @@ RSpec.describe CoronaVirus::Input do
       expect(subject.vaccine).to be_an Array
     end
   end
-
 end

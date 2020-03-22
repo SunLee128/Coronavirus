@@ -2,42 +2,42 @@ module CoronaVirus
   class Human
     attr_accessor :x, :y, :positions, :path
     attr_reader :i
-    
-    def initialize(options = {})
-      @i = Input.new
-      @x = options[:x] || @i.virus[0]
-      @y = options[:y] || @i.virus[1]
-      @path = options[:path] ||@i.path
+
+    def initialize(input)
+      # @i = Input.new
+      @x = input.virus[0]
+      @y = input.virus[1]
+      @path = input.path
     end
 
-    def up
-      @y = (@y-1) % @i.grid_size
+    def up(input)
+      @y = (@y-1) % input.grid_size
     end
 
-    def down
-      @y = (@y+1) % @i.grid_size
+    def down(input)
+      @y = (@y+1) % input.grid_size
     end
 
-    def left
-      @x = (@x-1) % @i.grid_size
+    def left(input)
+      @x = (@x-1) % input.grid_size
     end
 
-    def right
-      @x = (@x+1) % @i.grid_size
+    def right(input)
+      @x = (@x+1) % input.grid_size
     end
 
-    def move
+    def move(input)
       @positions = []
-      @path.each do |move|
+      input.path.each do |move|
         case move
         when "U"
-          up
+          up(input)
         when "D"
-          down
+          down(input)
         when "L"
-          left
+          left(input)
         when "R"
-          right
+          right(input)
         end
         @positions << [@x, @y]
       end

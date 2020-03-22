@@ -4,7 +4,7 @@ require './lib/corona_virus/human'
 
 RSpec.describe CoronaVirus::Human do
   let(:input) {double(grid_size: 4, virus: [2,1], humans:[[0,0],[2,1],[3,0]], path: ["U","D","L"], vaccine:[3,1]  )}
-  subject {described_class.new(:x=> 0, :y => 0, :path => ["U","L","D","L"])}
+  subject {described_class.new(input)}
 
   describe 'attributes' do
     it 'allows read and write for :x' do
@@ -35,73 +35,69 @@ RSpec.describe CoronaVirus::Human do
     it 'has @path as array' do
       expect(subject.path).to be_an Array
     end
-
-    it 'creates a new Input instance' do
-      allow(input).to receive(:new).and_return(input)
-      allow(subject).to receive(:new)
-      subject.new
-      expect(subject.i).not_to be_nil
-    end
   end
 
   describe '#up' do
     it 'moves up' do
       subject.y = 3
-      subject.up
+      subject.up(input)
       expect(subject.y).to eq(2)
     end
 
     it 'jumps the other side of the grid when y=0' do
       subject.y = 0
       allow(input).to receive(:grid_size).with(4)
-      subject.up
+      subject.up(input)
       expect(subject.y).to eq(3)
     end
   end
 
   describe '#down' do
     it 'moves down' do
-      subject.down
+      subject.y = 0
+      subject.down(input)
       expect(subject.y).to eq(1)
     end
 
     it 'jumps the other side of the grid when y=i.grid_size-1' do
       subject.y = 3
       allow(input).to receive(:grid_size).with(4)
-      subject.down
+      subject.down(input)
       expect(subject.y).to eq(0)
     end
   end
   describe '#left' do
     it 'moves left' do
-      subject.left
-      expect(subject.x).to eq(3)
+      subject.x = 3
+      subject.left(input)
+      expect(subject.x).to eq(2)
     end
     it 'jumps the other side of the grid when x=0' do
       subject.x = 0
       allow(input).to receive(:grid_size).with(4)
-      subject.left
+      subject.left(input)
       expect(subject.x).to eq(3)
     end
 
   end
   describe '#right' do
     it 'moves right' do
-      subject.right
+      subject.x = 0
+      subject.right(input)
       expect(subject.x).to eq(1)
     end
 
     it 'jumps the other side of the grid when x=i.grid_size-1' do
       subject.x = 3
       allow(input).to receive(:grid_size).with(4)
-      subject.right
+      subject.right(input)
       expect(subject.x).to eq(0)
     end
   end
 
   describe '#move' do
     it 'iterates by the length of the path' do
-      subject.move
+      subject.move(input)
       expect(subject.positions.length).to eq(subject.path.length)
     end
 
