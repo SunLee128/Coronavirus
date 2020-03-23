@@ -3,7 +3,7 @@ require './lib/corona_virus/input'
 require './lib/corona_virus/human'
 
 RSpec.describe CoronaVirus::Virus do
-  let(:input) {double(grid_size: 4, virus: [2,1], humans:[[0,0],[2,1],[3,0]], path: ["U","D","L"], vaccine:[3,1]  )}
+  let(:input) {double(grid_size: 4, virus: [2,1], humans:[[0,0],[2,1],[3,0]], path: ["U","D","L"], vaccine:[3,1])}
   subject {described_class.new(input)}
 
   describe 'attributes' do
@@ -66,6 +66,7 @@ RSpec.describe CoronaVirus::Virus do
       expect(subject.y).to eq(0)
     end
   end
+
   describe '#left' do
     it 'moves left' do
       subject.x = 3
@@ -117,4 +118,16 @@ RSpec.describe CoronaVirus::Virus do
       expect(subject).to respond_to(:right)
     end
   end
+
+  describe '#check_humans' do
+    it 'returns intersection of humans and positions array' do
+      subject.positions = [[2,1]]
+      expect(subject.infectees).to eq([2,1]) 
+    end
+
+    it 'responds to #transfer' do
+    end
+  end
+
+  
 end

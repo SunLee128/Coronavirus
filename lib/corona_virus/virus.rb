@@ -1,11 +1,13 @@
 module CoronaVirus
   class Virus
-    attr_accessor :x, :y, :positions, :path
+    attr_accessor :x, :y, :positions, :path, :infectees
 
-    def initialize(input, human, results)
+    def initialize(input)
       @x = input.virus[0]
       @y = input.virus[1]
       @path = input.path
+      @infectees = []
+      check_humans(input)
     end
 
     def up(input)
@@ -41,16 +43,16 @@ module CoronaVirus
       end
     end
 
-    def check_humans(human)
-      @find_humans = human.humans & @positions
-      spread if @find_humans.length > 0
+    def check_humans(input)
+      @infectees = input.humans & @positions
+      transfer if @infectees.length > 0
     end
 
-    def spread(human)
+    def transfer(human, result)
       @find_humans.each do |h|
-        human.kill_creature(c)
-        Zombie.new(:x=>c[0], :y=>c[1])
-        @@score += 1
+        # human.kill_creature(c)
+        # Zombie.new(:x=>c[0], :y=>c[1])
+        result.count_add
       end
     end
   

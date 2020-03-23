@@ -5,7 +5,7 @@ require_relative "corona_virus/virus"
 
 module CoronaVirus
   i = Input.new
-  r = Result.new
+  # r = Result.new
 
 
   # Virus.new

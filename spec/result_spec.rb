@@ -9,6 +9,11 @@ RSpec.describe CoronaVirus::Result do
       subject.coronavirus_count = 6
       expect(subject.coronavirus_count).to eq(6)
     end
+
+     it 'allows read and write for :virus' do
+      subject.virus = [[1,2],[3,4]]
+      expect(subject.virus).to eq([[1,2],[3,4]])
+    end
   end
 
   describe '#count_add' do
@@ -30,4 +35,5 @@ RSpec.describe CoronaVirus::Result do
       expect(subject.coronavirus_count).to eq(0)
     end
   end
+
 end
